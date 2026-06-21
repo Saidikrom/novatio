@@ -143,15 +143,6 @@ const Card = ({ children, style, accent }: {
   </div>
 );
 
-// ─── Label chip ───────────────────────────────────────────────────────────
-const _Chip = ({ label, color }: { label: string; color: string }) => (
-  <span style={{
-    fontSize: 9, fontWeight: 700, padding: '2px 8px',
-    background: `${color}18`, border: `1px solid ${color}40`,
-    borderRadius: 20, color,
-  }}>{label}</span>
-);
-
 // ─── Section heading ──────────────────────────────────────────────────────
 const SectionLabel = ({ children, color = 'rgba(124,106,246,0.75)' }: { children: React.ReactNode; color?: string }) => (
   <div style={{
@@ -176,7 +167,6 @@ const slideBase: React.CSSProperties = {
 // ══════════════════════════════════════════════════════════════════════════
 function Slide0Intro({ userName }: { userName: string }) {
   const d = week2ReportData;
-  const _improved = d.scoreChange >= 0;
 
   return (
     <div style={{ ...slideBase, alignItems: 'center', justifyContent: 'center', textAlign: 'center' }}>
@@ -542,50 +532,14 @@ function Slide2Calories() {
 // Slide 3 — Medicines (Visual-first redesign)
 // ══════════════════════════════════════════════════════════════════════════
 
-// Pill grid cell per medicine per day
-function _MedCell({ taken, total, delay }: { taken: number; total: number; delay: number }) {
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => { const t = setTimeout(() => setMounted(true), delay); return () => clearTimeout(t); }, [delay]);
-  const pct = taken / total;
-  const color = pct === 1 ? T.accentGreen : pct >= 0.75 ? '#84CC16' : pct >= 0.5 ? T.accentAmber : T.accentRed;
-  return (
-    <div style={{
-      width: 26, height: 26, borderRadius: 8,
-      background: mounted
-        ? pct === 1
-          ? `linear-gradient(135deg, ${T.accentGreen}, #34D399)`
-          : pct >= 0.5
-          ? `linear-gradient(135deg, ${T.accentAmber}, #FCD34D)`
-          : `linear-gradient(135deg, ${T.accentRed}, #FB923C)`
-        : 'rgba(0,0,0,0.06)',
-      transition: `background 0.5s ${T.easing} ${delay}ms`,
-      display: 'flex', alignItems: 'center', justifyContent: 'center',
-      boxShadow: mounted ? `0 2px 8px ${color}44` : 'none',
-      position: 'relative', overflow: 'hidden',
-    }}>
-      {mounted && pct === 1 && (
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-          <polyline points="20 6 9 17 4 12"/>
-        </svg>
-      )}
-      {mounted && pct < 1 && (
-        <span style={{ fontSize: 9, fontWeight: 800, color: 'white' }}>{taken}/{total}</span>
-      )}
-    </div>
-  );
-}
-
 function Slide3Medicines() {
   const d = week2ReportData;
   const pct = d.medicineAdherence;
   const w1pct = d.week1.medicineAdherence;
-  const _improved = pct > w1pct;
   const accentColor = pct >= 80 ? T.accentGreen : pct >= 50 ? T.accentAmber : T.accentRed;
   const [show, setShow] = useState(false);
   useEffect(() => { const t = setTimeout(() => setShow(true), 80); return () => clearTimeout(t); }, []);
 
-  // Build medicine name list from data
-  const _allMedNames = Array.from(new Set(d.missedMedicineDetails.flatMap(m => m.names)));
   const coreMeds = ['Omega-3', 'D vitamini', 'B12', 'Magniy', 'Tsink'];
 
   return (
