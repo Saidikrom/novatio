@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { weeklyReportData, DayReport } from '../data/weeklyReportData';
+import { weeklyReportData } from '../data/weeklyReportData';
 
 // ─── Slide index constants ─────────────────────────────────────────
 const TOTAL_SLIDES = 6;
@@ -814,14 +814,6 @@ const slideBase: React.CSSProperties = {
   display: 'flex', flexDirection: 'column',
   overflow: 'hidden',
   fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif',
-};
-
-const statBox: React.CSSProperties = {
-  background: 'rgba(255,255,255,0.80)',
-  border: '1px solid rgba(0,0,0,0.08)',
-  borderRadius: 14,
-  padding: '12px 14px',
-  boxShadow: '0 2px 10px rgba(0,0,0,0.06)',
 };
 
 // ─── Slides registry ───────────────────────────────────────────────
