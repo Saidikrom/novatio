@@ -144,7 +144,7 @@ const Card = ({ children, style, accent }: {
 );
 
 // ─── Label chip ───────────────────────────────────────────────────────────
-const Chip = ({ label, color }: { label: string; color: string }) => (
+const _Chip = ({ label, color }: { label: string; color: string }) => (
   <span style={{
     fontSize: 9, fontWeight: 700, padding: '2px 8px',
     background: `${color}18`, border: `1px solid ${color}40`,
@@ -176,7 +176,7 @@ const slideBase: React.CSSProperties = {
 // ══════════════════════════════════════════════════════════════════════════
 function Slide0Intro({ userName }: { userName: string }) {
   const d = week2ReportData;
-  const improved = d.scoreChange >= 0;
+  const _improved = d.scoreChange >= 0;
 
   return (
     <div style={{ ...slideBase, alignItems: 'center', justifyContent: 'center', textAlign: 'center' }}>
@@ -543,7 +543,7 @@ function Slide2Calories() {
 // ══════════════════════════════════════════════════════════════════════════
 
 // Pill grid cell per medicine per day
-function MedCell({ taken, total, delay }: { taken: number; total: number; delay: number }) {
+function _MedCell({ taken, total, delay }: { taken: number; total: number; delay: number }) {
   const [mounted, setMounted] = useState(false);
   useEffect(() => { const t = setTimeout(() => setMounted(true), delay); return () => clearTimeout(t); }, [delay]);
   const pct = taken / total;
@@ -579,13 +579,13 @@ function Slide3Medicines() {
   const d = week2ReportData;
   const pct = d.medicineAdherence;
   const w1pct = d.week1.medicineAdherence;
-  const improved = pct > w1pct;
+  const _improved = pct > w1pct;
   const accentColor = pct >= 80 ? T.accentGreen : pct >= 50 ? T.accentAmber : T.accentRed;
   const [show, setShow] = useState(false);
   useEffect(() => { const t = setTimeout(() => setShow(true), 80); return () => clearTimeout(t); }, []);
 
   // Build medicine name list from data
-  const allMedNames = Array.from(new Set(d.missedMedicineDetails.flatMap(m => m.names)));
+  const _allMedNames = Array.from(new Set(d.missedMedicineDetails.flatMap(m => m.names)));
   const coreMeds = ['Omega-3', 'D vitamini', 'B12', 'Magniy', 'Tsink'];
 
   return (

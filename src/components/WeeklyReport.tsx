@@ -199,7 +199,7 @@ function CalorieBar({ day, value, goal, isHighlight }: { day: string; value: num
 }
 
 // ─── Medicine dot grid ─────────────────────────────────────────────
-function MedicineDotGrid({ days }: { days: DayReport[] }) {
+function _MedicineDotGrid({ days }: { days: DayReport[] }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 8, width: '100%' }}>
       {days.map((d, di) => (
@@ -732,7 +732,7 @@ function Slide3Medicines() {
   );
 }
 
-function Slide4Activities() {
+function _Slide4Activities() {
   const data = weeklyReportData;
   const hours = Math.floor(data.totalActivityMinutes / 60);
   const mins = data.totalActivityMinutes % 60;
@@ -796,7 +796,7 @@ function Slide4Activities() {
   );
 }
 
-function Slide5Water() {
+function _Slide5Water() {
   const data = weeklyReportData;
   const pct = Math.round((data.avgWater / 2.5) * 100);
 
@@ -1008,9 +1008,6 @@ const SLIDES = [
   (args: { userName: string }) => <Slide7End userName={args.userName} />,
 ];
 
-const SLIDE_LABELS = [
-  'Kirish', 'Ball', 'Kalori', 'Dorilar', 'Kayfiyat', 'Xulosa',
-];
 
 // ─── Progress bar strip ────────────────────────────────────────────
 function StoryProgressBar({
